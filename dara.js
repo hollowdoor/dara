@@ -159,6 +159,7 @@ function dara(){
         return dara.activate(dara, args);
     }
     
+    this.flipped = false;
     this.args = args;
 }
 /**
@@ -193,7 +194,10 @@ dara.mix = function(obj, context){
             if(!context){
                 dara.prototype[n] = (function(fn){
                     return function(){
-                        return fn.apply(this, this.args.concat(slice(arguments)));
+                        var args = this.args.concat(slice(arguments));
+                        if(this.flipped)
+                            args = args.reverse();
+                        return fn.apply(this, args);
                     };
                 })(obj[n]);
                 
@@ -201,7 +205,10 @@ dara.mix = function(obj, context){
                 
                 dara.prototype[n] = (function(fn, context){
                     return function(){
-                        return fn.apply(context, this.args.concat(slice(arguments)));
+                        var args = this.args.concat(slice(arguments));
+                        if(this.flipped)
+                            args = args.reverse();
+                        return fn.apply(context, args);
                     };
                 })(obj[n], context);
             
@@ -584,54 +591,18 @@ dara.type = typeString;
 
 dara.mix(dara);
 
+dara.prototype.flip = function(){
+    this.args = this.args.reverse();
+    this.flipped = true;
+};
+
 var thisname = 'dara.js';
 
 if(isNode){
-    var bestow = require('bestow');
+    var bestow = require('./node_modules/bestow/bestow');
     
     dara.send = bestow.createSender('dara.js', __dirname);
     dara.middleWare = bestow.createMiddleware('dara.js', __dirname);
-    /*
-    var path = require('path'),
-        fs = require('fs'),
-        url = require('url');
-    
-    dara.send = function(req, res, options){
-        
-        options = options || {};
-        
-        var root = (options.root) ? options.root : '/',
-            basename = path.basename(req.url),
-            dirname = path.dirname(url.parse(req.url).pathname),
-            modulename = path.join(__dirname, thisname);
-        
-        if(thisname !== basename)
-            return false;
-        if(root !== dirname)
-            return false;
-        
-        var readstream = fs.createReadStream(modulename);
-        
-        res.setHeader('content-type', 'application/javascript');
-        readstream.pipe(res).on('error', function(e){
-            res.writeHead(500);
-            res.end('500 Internal server error.');
-            console.log(thisname+' javascript stream failed. 500 error was sent.');
-        });
-        
-        return true;
-    };
-    
-    dara.middleWare = function(options){
-        
-        return function(req, res, next){
-            
-            var daraed = dara.send(req, res, options);
-            //Continue to the next middle ware
-            if(!daraed)
-                next();
-        }; 
-    };*/
     
     module.exports = dara;
 }else{
