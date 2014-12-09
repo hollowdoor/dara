@@ -8,6 +8,7 @@ var server = http.createServer(function(req, res){
     
     var sender = dara.send(req, res);
     
+    console.log('If something logs sender didn\'t work.');
     console.log('sender = ', sender);
     if(!sender.sending){
         console.log('no send');
