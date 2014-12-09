@@ -1,8 +1,7 @@
 {
     "name": "dara",
-    "description": "Compose async functions.",
+    "description": "Compose async functions, and do some other stuff functional.",
     "version": "0.0.1",
-    "private": true,
     "dependencies": {
         "bestow":"0.0.x"
     }
