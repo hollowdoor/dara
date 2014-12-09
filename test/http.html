@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="dara.js"></script>
+</head>
+<body>
+<script>
+var one = ['one'];
+var two = ['two'];
+var three = dara.union(one, two);
+console.log(three);
+var four = dara(one).union(two);
+console.log(four);
+var five = dara(one, two).union();
+console.log(five);
+
+var six = dara(one).isType('Array');
+var seven = dara(one).isType('Object');
+console.log(six);
+console.log(seven);
+var eight = dara(one, two).isType('Array');
+console.log(eight);
+
+function thing(one, two){
+    console.log(arguments);
+    console.log(this);
+    console.log(this.say || 'nothing');
+}
+var doThing = dara(thing).partial('one');
+
+doThing('two');
+
+var cont = {say: 'what?'};
+var doIt = doThing.bind(cont, 'three');
+doIt('four');
+console.log(doIt);
+console.log(doIt.say);
+
+var bla = dara(dara).partial(['first']);
+
+console.log(bla(['second']).union(two));
+</script>
+</body>
+</html>
