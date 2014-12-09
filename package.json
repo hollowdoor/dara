@@ -5,5 +5,9 @@
     "version": "0.0.1",
     "dependencies": {
         "bestow":"0.0.x"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/hollowdoor/dara.git"
     }
 }
