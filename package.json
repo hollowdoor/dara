@@ -2,12 +2,13 @@
     "name": "dara",
     "author": "Quentin Engles",
     "description": "Compose async functions, and do some other stuff functional.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "dependencies": {
         "bestow":"0.0.x"
     },
     "repository": {
       "type": "git",
       "url": "git://github.com/hollowdoor/dara.git"
-    }
+    },
+    "main": "data.js"
 }
