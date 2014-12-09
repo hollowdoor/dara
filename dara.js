@@ -1,5 +1,8 @@
 (function(isNode, _globals){
 "use strict";
+//git remote add origin https://github.com/hollowdoor/dara.git
+//git push -u origin master
+//npm publish
 //Polyfills, and masking shortcuts.
 if (typeof Object.create != 'function') {
   Object.create = (function() {
@@ -584,6 +587,11 @@ dara.mix(dara);
 var thisname = 'dara.js';
 
 if(isNode){
+    var bestow = require('bestow');
+    
+    dara.send = bestow.createSender('dara.js', __dirname);
+    dara.middleWare = bestow.createMiddleware('dara.js', __dirname);
+    /*
     var path = require('path'),
         fs = require('fs'),
         url = require('url');
@@ -623,7 +631,7 @@ if(isNode){
             if(!daraed)
                 next();
         }; 
-    };
+    };*/
     
     module.exports = dara;
 }else{
