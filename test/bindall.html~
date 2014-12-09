@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../dara.js"></script>
+</head>
+<body>
+<script>
+function hi(){
+    this.speak = 'Hi!';
+    this.sayHi = function(){
+        console.log(this.speak);
+    };
+}
+
+function bye(){}
+bye.prototype.sayBye = function(){
+    console.log('Bye!');
+};
+
+function greet(hisky){
+    
+    
+    dara.bindAll(hisky, this);
+    dara.bindAll(bye, this);
+}
+greet.prototype.quick = function(){
+        
+        this.sayHi();
+        this.speak = 'Hello world!';
+        this.sayBye();
+    };
+var h = new hi;
+var g = new greet(h);
+
+g.quick();
+h.sayHi();
+</script>
+</body>
+</html>

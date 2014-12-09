@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../dara.js"></script>
+</head>
+<body>
+<p id="hello" data-bind="click: doBye">hi</p>
+<script>
+var thing = dara.create({
+    live: function(){
+        this.message = 'I am alive!';
+    },
+    kill: function(){
+        this.message = 'Fizzle!';
+    }
+    print: function(){
+        console.log(this.message);
+    },
+    com: dara.computed(1, function(){
+        return this.message + ' ola';
+    }),
+    printOdd: function(){
+        console.log(this.com);
+    },
+    el: dara.element('#hello', 'html'),
+    doBye: function(){
+        this.el = 'Bye';
+    }
+});
+
+thing.live();
+thing.print();
+thing.kill();
+thing.print();
+thing.printOdd();
+
+var j = dara.toJSON(thing);
+console.log(j);
+</script>
+</body>
+</html>

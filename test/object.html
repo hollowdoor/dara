@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../dara.js"></script>
+</head>
+<body>
+<button id="doit">do it</button>
+<script>
+var m = dara.messenger();
+m.on('say', function(name){
+    this.name = name || this.name;
+    this.speak();
+});
+
+function Greeting(obj){
+    
+    dara.assign(this, obj);
+    
+    dara.computed(this, 'sentence', function(){
+        
+        return this.words+' '+this.name+'!';
+    });
+    
+    dara.computedOnce(this, 'thing', function(){
+        return this.words+' '+this.name+'!';
+    });
+    
+    this.speak = function(){
+        console.log(this.sentence);
+    };
+}
+
+var greeting = new Greeting({
+    words: 'Hello',
+    name: 'my friend'
+});
+
+greeting.speak();
+
+var c = m.connect(greeting);
+var d = document.querySelector('#doit');
+d.addEventListener('click', function(){
+    //greeting.name = 'world';
+    c.say('world');
+}, false);
+
+</script>
+</body>
+</html>
