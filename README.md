@@ -170,7 +170,7 @@ dara.getobject(['one', 'two', 'three'], list); //returns an object
 
 **example**
 ```
-function(one, two, three){
+function nums(one, two, three){
     var args = dara.getargs(['one', 'two', 'three'], arguments);
     return args;
 }
