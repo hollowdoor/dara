@@ -186,5 +186,7 @@ nums(1, 2, 3); //returns an object
 
 ## dara.uniq(array, callback);
 
-Produce a unique array, and use an optional callback to process each array member.
+Produce an array with unique values. Use an optional callback to process each array member.
+
+
 
