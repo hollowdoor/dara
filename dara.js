@@ -419,38 +419,37 @@ dara.getargs = dara.getobject = function(names, arr, fn){
 };
 
 var uniq = dara.uniq = function(arr, fn){
-    if(!isType(arr, 'Array') && !isType(fn, 'Function'))
+    if(!isType(arr, 'Array'))
         return null;
     
-    var result = [], tmp = arr,
-    val, fn = fn || false;
-    
-    while(val = tmp.shift()){
+    fn = fn || false;
         
-        if(result.indexOf(val) < 0){
-            
-            result.push(!fn ? val : fn(val));
+    var result = [arr[0]], container = {};
+    
+    for(var i=1; i<arr.length; i++){
+        if(!container[arr[i]]){
+            container[arr[i]] = 1;
+            result.push(!fn ? arr[i] : fn(arr[i]));
         }
     }
     
-    return !fn ? result : uniq(result);
+    return result;
 };
 
 var union = dara.union = function(){
+    
+    
     
     var result = [],
         args = slice(arguments),
         temp = args.shift(),
         len = args.length,
         val, index;
-        
     
-    if(typeString(args[0]) !== 'Array')
-        throw new Error('Error dara.union argument 0 is not an array.');
+    if(!args.every(function(one, i){ index = i; return isType(one, 'Array'); })
+        throw new Error('Error in dara.union: argument '+index+' is not an array.');
     
     for(var i=0; i<len; i++){
-        if(typeString(args[i]) !== 'Array')
-            throw new Error('Error dara.union argument '+i+' is not an array.');
         temp = temp.concat(args[i]);
     }
     
@@ -546,7 +545,7 @@ var merge = dara.merge = function(){
         }
     }
     
-    if(args.every(function(thing){ return isType(thing, 'Array'); })){
+    if(args.every(function(thing, ){ return isType(thing, 'Array'); })){
         result = [];
         
         while(!fn && (src = args.shift())){
@@ -596,10 +595,17 @@ dara.prototype.flip = function(){
     this.flipped = true;
 };
 
+dara.prototype.unFlip = function(){
+    if(this.flipped){
+        this.args = this.args.reverse();
+        this.flipped = false;
+    }
+};
+
 var thisname = 'dara.js';
 
 if(isNode){
-    var bestow = require('./node_modules/bestow/bestow');
+    var bestow = require('bestow');
     
     dara.send = bestow.createSender('dara.js', __dirname);
     dara.middleWare = bestow.createMiddleware('dara.js', __dirname);
