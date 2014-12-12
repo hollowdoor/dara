@@ -2,7 +2,7 @@
     "name": "dara",
     "author": "Quentin Engles",
     "description": "Compose async functions, and do some other stuff functional.",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "dependencies": {
         "bestow":"0.0.x"
     },
