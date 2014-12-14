@@ -5,7 +5,7 @@
 
 The dara function is an overloaded constructor with several static methods attached to it. It does not need `new` to be instantiated.
 
-If the dara function is called with all function arguments is creates a new function that is composed of those functions. These functions are not simply composed, and some preparation is needed to use this functionality.
+If the dara function is called with all function arguments it creates a new function that is composed of those functions. These functions are not simply composed, and some preparation is needed to use this functionality.
 
 See [dara.compose][#dara.compose] to see the explanation of how to use function composition with dara.
 
@@ -18,7 +18,7 @@ var dara = require('dara');
 
 ## dara(..., all functions or depends on the methods attached)
 
-Because the `dara` function is overloaded and you can attache any function to it, and it's arguments are used by the methods set on it then arguments passed to it can be potentially any object, or primitive.
+Because the `dara` function is overloaded and you can attache any function to it, and it's arguments are used by the methods set on it. The arguments passed to it can be potentially any object, or primitive.
 
 ## dara.mix(object, context)
 
@@ -227,11 +227,11 @@ Pass any number of arrays, and get a single array made of the unique values of a
 
 ## dara.pick(array, object, callback)
 
-Produce and new object with selected members from `object` using names in `array`. Use an optional callback to operate on `callback(object, key found in array)`.
+Produce a new object with selected members from `object` using names in `array`. Use an optional callback to operate on `callback(object, key found in array)`.
 
 ## dara.merge(object|array, ..., callback)
 
-Create a new object made of all objects, or arrays passed to dara.merge. All arguments must be of the same type as objects, or arrays. Use an option callback to operate on `callback(current object, key)`. The return value of `callback` can be an value.
+Create a new object made of all objects, or arrays passed to dara.merge. All arguments must be of the same type as objects, or arrays. Use an optional callback to operate on `callback(current object, key)`. The return value of `callback` can be any value.
 
 dara.merge only makes a shallow copy of passed objects.
 dara.merge works similar to dara.union for arrays but no unique operation is done.
@@ -240,7 +240,7 @@ If you pass any value that is not an object, or array the value of the first arg
 
 ## dara.sort(array, integer|callback)
 
-Sort an array with natural sort. Optionally specify a sort order by passing a negative number, or a positive number. Positive meaning alpha, and negative meaning reverse alpha. -1, or 1 will work fine for direction.
+Sort an array with natural sort. Optionally specify a sort order by passing a negative number, or a positive number. Positive meaning alpha, and negative meaning reverse alpha. -1, or 1 will work fine for the direction integer.
 
 Optionally pass a callback to create your own sort. This will work like the built in javascript sort.
 
