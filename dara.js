@@ -573,7 +573,7 @@ var merge = dara.merge = function(){
     }
     
     if(!args.every(function(thing){ return isType(thing, 'Object'); }))
-        return undefined;
+        return args[0];
     
     result = {};
     
@@ -645,9 +645,10 @@ function createSort(direction){
     
     direction = direction || 1;
     
-    if(direction < -1 || direction > 1){
+    if(direction < -1){
+        direction = -1;
+    else if(direction > 1)
         direction = 1;
-    }
     
     function naturalSort (a, b) {
         var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
