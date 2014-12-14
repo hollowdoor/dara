@@ -115,7 +115,7 @@ function third(arg1){
 }
 var fn = dara.compose(first, second);
 fn(1); //log 2
-fn(3): //call stack error. Too much recursion.
+fn(3, third): //call stack error. Too much recursion.
 ```
 
 **example**
@@ -134,8 +134,28 @@ function third(arg1){
 }
 var fn = dara.compose(first, second);
 //This is making a safe call even though the function is naive, and has no other checks like isNaN.
-fn(1); //log 4
+fn(1, third); //log 4
 ```
+
+The last two examples also demomstrate the async nature of the compose method. A callback in the last argument of a composed function is used last in the virtual call stack created by dara.compose.
+
+So using when using dara.compose
+```javascript
+function callback1(arg1, next){
+    next(arg1);
+}
+function callback2(arg1){
+    console.log(arg1);
+}
+var composedFunction = dara.compose(callback1);
+composedFunction(1, callback2);
+```
+Callback `callback2` is called after `callback1`. `callback1` can also return a value, but it's assumed that the most common use case will be async operations. When the `yield` operator has more support then maybe dara will have added support for return values that work with async operations. Until then dara is meant to used in the browser, and server so it will not contain special support for yield for the time being.
+
+### Notice
+*Sorry to all of you who have installed dara before I added the last few amendments to the documentation.*
+
+*The usage of how the last callback works on a composed function from dara.compose should be emphasised. Thank you for your interest.*
 
 ### dara(..., function)
 
