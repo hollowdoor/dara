@@ -171,6 +171,10 @@ dara called with one function then .compose still creates a composition.
 
 `dara.method()`, and `dara(args, ...).method()` are the same invocation for the same method name as long as the arguments used are acceptable to the method.
 
+## dara.partial(function)
+
+Make a simple partial function. Internally this method uses the `bind` static function method so it's mostly just a mnemonic reminder of what's being accomplished.
+
 ## dara.getargs | dara.getobject
 
 These two do the same thing, but their names are a mnemonic that represents their intended usage for different situations.
@@ -204,9 +208,38 @@ nums(1, 2, 3); //returns an object
 */
 ```
 
-## dara.uniq(array, callback);
+## dara.uniq(array, callback)
 
 Produce an array with unique values. Use an optional callback to process each array member.
 
+## dara.assign(destination, source)
+
+Assign all the members of object `source` to `destination`.
+
+## dara.uniq(array, callback)
+
+The fastest possible function for making unique member arrays.
+Make an array with only unique values. Pass an optional callback to process each member of the array.
+
+## dara.union(array, ...)
+
+Pass any number of arrays, and get a single array made of the unique values of all arrays passed to dara.union
+
+## dara.pick(array, object, callback)
+
+Produce and new object with selected members from `object` using names in `array`. Use an optional callback to operate on `callback(object, key found in array)`.
+
+## dara.merge(object|array, ..., callback)
+
+Create and new object made of all objects, or arrays passed to dara.merge. All arguments must be objects, or arrays. Use an option callback to operate on `callback(current object, key)`.
+
+dara.merge only makes a shallow copy of passed objects.
+dara.merge works similar to dara.union for arrays but no unique operation is done.
+
+## dara.sort(array, integer|callback)
+
+Sort an array with natural sort. Optionally specify a sort order by passing a negative number, or a positive number. Positive meaning alpha, and negative meaning reverse alpha. -1, or 1 will work fine for direction.
+
+Optionally pass a callback to create your own sort. This will work like the built in javascript sort.
 
 

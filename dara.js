@@ -282,6 +282,12 @@ dara.compose = function(){
         return next.apply(self, fnArgs);
     };
     
+    fn.final = function(){
+        return function(){
+            fn.apply(this, arguments);
+        };
+    };
+    
     return fn;
 };
 
@@ -542,6 +548,8 @@ var merge = dara.merge = function(){
         
         if(fnType === 'Function'){
             fn = args.pop();
+        }else if(fnType === 'String'){
+            args.pop();
         }
     }
     
@@ -555,7 +563,7 @@ var merge = dara.merge = function(){
         while(fn && (src = args.shift())){
             current = [];
             for(i=0; i<src.length; i++){
-                current[i] = fn(src[i], i, src);
+                current[i] = fn(src, i);
                 
             }
             result = result.concat(current);
@@ -572,7 +580,7 @@ var merge = dara.merge = function(){
     while(src = args.shift()){
         
         for(name in src){
-            result[name] = !fn ? src[name] : fn(src[name], name, src);
+            result[name] = !fn ? src[name] : fn(src, name);
         }
     }
     
@@ -636,6 +644,10 @@ http://js-naturalsort.googlecode.com/svn/trunk/naturalSort.js
 function createSort(direction){
     
     direction = direction || 1;
+    
+    if(direction < -1 || direction > 1){
+        direction = 1;
+    }
     
     function naturalSort (a, b) {
         var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
