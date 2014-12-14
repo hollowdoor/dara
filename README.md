@@ -243,3 +243,13 @@ Sort an array with natural sort. Optionally specify a sort order by passing a ne
 Optionally pass a callback to create your own sort. This will work like the built in javascript sort.
 
 
+# Experimental Methods
+
+For all purposes the following methods must be considered experimental for the time being. There will be a possibility of alteration, or removal for all of these.
+
+## dara.messenger()
+
+## dara.computed(object, function|object);
+
+## dara.computedOnce(object, function|object);
+
