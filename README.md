@@ -93,8 +93,8 @@ function third(arg1){
     console.log(arg1);
 }
 var fn = dara.compose(first, second);
-fn(1); //log 2
-fn(3): //log 6
+fn(1, third); //log 2
+fn(3, third): //log 6
 ```
 
 Be careful of using next.first, or next.self because the same call stack error that effects regular recursive functions also effects functions composed with `dara`.
