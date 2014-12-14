@@ -139,7 +139,7 @@ fn(1, third); //log 4
 
 The last two examples also demomstrate the async nature of the compose method. A callback in the last argument of a composed function is used last in the virtual call stack created by dara.compose.
 
-So using when using dara.compose
+So when using dara.compose
 ```javascript
 function callback1(arg1, next){
     next(arg1);
@@ -231,10 +231,12 @@ Produce and new object with selected members from `object` using names in `array
 
 ## dara.merge(object|array, ..., callback)
 
-Create and new object made of all objects, or arrays passed to dara.merge. All arguments must be objects, or arrays. Use an option callback to operate on `callback(current object, key)`.
+Create a new object made of all objects, or arrays passed to dara.merge. All arguments must be of the same type as objects, or arrays. Use an option callback to operate on `callback(current object, key)`. The return value of `callback` can be an value.
 
 dara.merge only makes a shallow copy of passed objects.
 dara.merge works similar to dara.union for arrays but no unique operation is done.
+
+If you pass any value that is not an object, or array the value of the first argument is returned.
 
 ## dara.sort(array, integer|callback)
 
