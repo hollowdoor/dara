@@ -214,7 +214,7 @@ Produce an array with unique values. Use an optional callback to process each ar
 
 ## dara.assign(destination, source)
 
-Assign all the members of object `source` to `destination`.
+Assign all the members of object `source` to `destination` object.
 
 ## dara.uniq(array, callback)
 
