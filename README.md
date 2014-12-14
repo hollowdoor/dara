@@ -150,7 +150,7 @@ function callback2(arg1){
 var composedFunction = dara.compose(callback1);
 composedFunction(1, callback2);
 ```
-Callback `callback2` is called after `callback1`. `callback1` can also return a value, but it's assumed that the most common use case will be async operations. When the `yield` operator has more support then maybe dara will have added support for return values that work with async operations. Until then dara is meant to used in the browser, and server so it will not contain special support for yield for the time being.
+Callback `callback2` is called after `callback1`. `callback2` can also return a value, but it's assumed that the most common use case will be async operations. When the `yield` operator has more support then maybe dara will have added support for return values that work with async operations. Until then dara is meant to used in the browser, and server so it will not contain special support for yield for the time being.
 
 ### Notice
 *Sorry to all of you who have installed dara before I added the last few amendments to the documentation.*
