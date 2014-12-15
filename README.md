@@ -1,6 +1,8 @@
 # Dara.js
 ## A little helper for Javascript async, and functional programming.
 
+**dara uses the MIT license**
+
 ## The dara function.
 
 The dara function is an overloaded constructor with several static methods attached to it. It does not need `new` to be instantiated.
