@@ -114,7 +114,7 @@ function third(arg1){
     console.log(arg1);
 }
 var fn = dara.compose(first, second);
-fn(1); //log 2
+fn(1, third); //log 2
 fn(3, third): //call stack error. Too much recursion.
 ```
 
