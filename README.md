@@ -49,7 +49,7 @@ adder.callFn(); //produces an error. The fn argument is not a function.
 
 **News**
 
-`dara.mix` also extends the static method space.
+`dara.mix` also extends the static method space. If there is not already a static method with the same name it will be added to dara.
 
 Both static, and constructor calls will work.
 
