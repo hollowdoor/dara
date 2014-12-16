@@ -262,6 +262,46 @@ Sort an array with natural sort. Optionally specify a sort order by passing a ne
 
 Optionally pass a callback to create your own sort. This will work like the built in javascript sort.
 
+# Utility methods (also static)
+
+These are mostly for internal usage, but have been exposed for the benefit of all.
+
+## dara.hasprop(object, name)
+
+Check is `object` contains the property `name`.
+
+## dara.getType(anything)
+
+This is the same as calling Object.prototype.toString.call.
+
+## dara.type(anything)
+
+Pass `anything`, and get one of these returned:
+
+* Number
+* String
+* Boolean
+* Object
+* Null
+* Undefined
+* Date
+* Function
+
+## dara.isType(anything, type)
+
+Check `type` as a string matches the type of `anything`.
+
+`type` should be capitalized, and can be any of these:
+
+* Number
+* String
+* Boolean
+* Object
+* Null
+* Undefined
+* Date
+* Function
+
 
 # Experimental Methods
 
