@@ -47,6 +47,22 @@ console.log(num);
 adder.callFn(); //produces an error. The fn argument is not a function.
 ```
 
+**News**
+
+`dara.mix` also extends the static method space.
+
+Both static, and constructor calls will work.
+
+```javascript
+dara.mix({
+    myMethod: function(){ /***/ }
+});
+//The next calls are the same providing the args match the
+//myMethod signature.
+dara.myMethod(args, ...);
+dara(args, ...).myMethod(args, ...);
+```
+
 That last call to `adder.callFn` demonstrates the limits of the dara constructor, and why you must be careful using the `mix` method to extend `dara`.
 
 This compromise allows the `dara` constructor to be almost any type of operator. It's a weakness, and a strength. It depends on how careful you are when designing methods you intend to use to extend the dara constructor.

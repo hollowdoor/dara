@@ -236,6 +236,10 @@ dara.mix = function(obj, context){
                 })(obj[n], context);
             
             }
+            
+            if(!(dara[n])){
+                dara[n] = obj[n];
+            }
         }else{
             dara.prototype[n] = obj[n];
         }
