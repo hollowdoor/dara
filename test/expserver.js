@@ -2,10 +2,21 @@ var express = require('express'),
     app = express(),
     dara = require('../dara'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    libdara = require('./libdara');
 
 
-app.use(dara.middleWare());
+app.use(dara.middleware());
+
+app.get('/greeting', function(req, res, next){
+    libdara.doIt(req, res, function(){
+        next();
+    });
+});
+
+app.get('/greeting', function(req, res){
+    res.send(JSON.stringify(res.data));
+});
 
 app.get('/', function(req, res){
     res.end('hello');

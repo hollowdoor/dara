@@ -733,12 +733,11 @@ var sort = dara.sort = function(arr, fn){
 };
 
 
-
-
 dara.hasprop = hasprop;
 dara.getType = getType;
 dara.isType = isType;
 dara.type = typeString;
+
 
 dara.mix(dara);
 
@@ -760,7 +759,7 @@ if(isNode){
     var bestow = require('bestow');
     
     dara.send = bestow.createSender('dara.js', __dirname);
-    dara.middleWare = bestow.createMiddleware('dara.js', __dirname);
+    dara.middleware = bestow.createMiddleware('dara.js', __dirname);
     
     module.exports = dara;
 }else{
