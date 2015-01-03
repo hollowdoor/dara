@@ -672,7 +672,7 @@ function createSort(direction){
     
     direction = direction || 1;
     
-    if(direction < -1){
+    if(direction < -1)
         direction = -1;
     else if(direction > 1)
         direction = 1;
@@ -753,7 +753,7 @@ dara.prototype.unFlip = function(){
     }
 };
 
-dara.extend = function(obj){
+dara.extend = function(obj, context){
         
     var init = obj.init || null;
     
@@ -761,12 +761,14 @@ dara.extend = function(obj){
         delete obj.init;
     
     if(isType(obj) === 'Object'){
-        dara.mix(obj);
+        dara.mix(obj, context);
     }
     
     if(isType(init) === 'Function'){
-        init.call(dara);
+        init.call(context || dara, dara);
     }
+    
+    return dara;
 };
 
 
