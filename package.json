@@ -10,11 +10,12 @@
       "type": "git",
       "url": "git://github.com/hollowdoor/dara.git"
     },
-    "main": "data.js",
+    "main": "dara.js",
     "keywords": [
         "async",
         "asynchronous",
-        "control flow",
+        "control",
+        "flow",
         "functional",
         "oop"
     ]
