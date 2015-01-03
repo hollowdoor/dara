@@ -1,3 +1,20 @@
+var router = require('./testrouter'),
+    http = require('http');
+
+
+router.get("/", function(req, res){
+    res.end('home!');
+});
+
+router.get("/test", function(req, res){
+    res.end('this is a test!');
+});
+
+http.createServer(function(req, res){
+    router(req, res);
+}).listen(3000);
+
+/*
 var http = require('http'),
     dara = require('../dara'),
     fs = require('fs'),
@@ -27,4 +44,4 @@ var server = http.createServer(function(req, res){
     }
 });
 
-server.listen(8080);
+server.listen(8080);*/

@@ -67,6 +67,10 @@ That last call to `adder.callFn` demonstrates the limits of the dara constructor
 
 This compromise allows the `dara` constructor to be almost any type of operator. It's a weakness, and a strength. It depends on how careful you are when designing methods you intend to use to extend the dara constructor.
 
+## dara.extend(object, context)
+
+dara.extend is the same as dara.mix, but also if a init method exists it will be called after the mix extension. It returns dara itself.
+
 ## Static methods
 
 ## dara.compose

@@ -753,7 +753,22 @@ dara.prototype.unFlip = function(){
     }
 };
 
-var thisname = 'dara.js';
+dara.extend = function(obj){
+        
+    var init = obj.init || null;
+    
+    if(init)
+        delete obj.init;
+    
+    if(isType(obj) === 'Object'){
+        dara.mix(obj);
+    }
+    
+    if(isType(init) === 'Function'){
+        init.call(dara);
+    }
+};
+
 
 if(isNode){
     var bestow = require('bestow');
@@ -761,9 +776,12 @@ if(isNode){
     dara.send = bestow.createSender('dara.js', __dirname);
     dara.middleware = bestow.createMiddleware('dara.js', __dirname);
     
+    
+    
     module.exports = dara;
 }else{
     window.dara = dara;
 }
+
 
 })(typeof module !== 'undefined' && module.exports, this);
