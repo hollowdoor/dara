@@ -166,6 +166,128 @@ if(typeString(null) === 'Object'){
         return result;
     };
 }
+
+var iterator = function(fn){
+    "use strict";
+    var each = null,
+        factory = this;
+    
+    var Each = function(list, cb){
+        
+        var len = list.length,
+            self = this;
+        
+        for(var i=0; i<len; i++){
+            cb.call(self, list[i], list, i);
+            
+        }
+    };
+    
+    var Iter = function(){
+        this.each = Each;
+    };
+    
+    return function(){
+        
+        var self = this,
+            save = null;
+        
+        if(this === factory){
+            self = new Iter;
+        }else
+        
+        if(self.each){
+            each = (self.each) ? self.each : null;
+            self.each = Each;
+        }
+        
+        var value = fn.apply(self, arguments);
+        if(save)
+            self.each = save;
+        
+        return value;
+    };
+};
+
+var sequencer = function(fn){
+    "use strict";
+    var factory = this;
+    
+    var Sequence = function(cb_list, cb){
+        
+        var index = -1,
+            list = cb_list,
+            self = this;
+        
+        var next = function(){
+            cb.call(self, list, ++index, next);
+        };
+        
+        next();
+    };
+    
+    var Seq = function(){
+        this.sequence = Sequence;
+    };
+    
+    return function(){
+        
+        var self = this,
+            save = null;
+        
+        if(self === factory){
+            self = new Seq;
+        }else{
+            save = (self.sequence) ? self.sequence : null;
+            self.sequence = Sequence;
+        }
+        
+        var value = fn.apply(self, arguments);
+        
+        if(save)
+            self.sequence = save;
+        
+        return value;
+    };
+};
+
+/**
+iterator, and sequence examples
+var map = iterator(function(list, cb){
+        
+    var result = [],
+        count = list.length;
+    
+    this.each(list, function(value, list, index){
+        setTimeout(function(){
+            result.push(value+1);
+            
+            if(!--count)
+                cb(result);
+        }, 1);
+    });
+    
+});
+
+map([4, 3, 2], function(results){
+    console.log(results);
+});
+
+var seq = sequencer(function(cb_list){
+    
+    this.sequence(cb_list, function(list, index, next){
+        
+        list[index](next);
+    });
+    
+});
+
+seq([
+    function(next){ console.log('seq 1'); next(); },
+    function(){ console.log('seq 2'); }
+]);
+*/
+
 /*
 dara
 
@@ -185,6 +307,8 @@ function dara(){
     this.flipped = false;
     this.args = args;
 }
+
+
 /**
 Instanciate now.
 dara.activate(constructor, array);
@@ -198,6 +322,9 @@ var activate = dara.activate = function(constructor, args){
     var factory = constructor.bind.apply(constructor, args);
     return new factory();
 };
+
+dara.iterator = iterator;
+dara.sequencer = sequencer;
 
 dara.partial = function(fn){
     var args = slice(arguments, 1);
@@ -242,6 +369,9 @@ dara.mix = function(obj, context){
             }
         }else{
             dara.prototype[n] = obj[n];
+            if(!(dara[n])){
+                dara[n] = obj[n];
+            }
         }
     }
 };
@@ -615,6 +745,8 @@ var merge = dara.merge = function(){
     
 };
 
+
+
 /*
 http://www.overset.com/2008/09/01/javascript-natural-sort-algorithm/
 http://js-naturalsort.googlecode.com/svn/trunk/naturalSort.js
@@ -754,6 +886,9 @@ dara.prototype.unFlip = function(){
 };
 
 dara.extend = function(obj, context){
+    
+    if(isType(obj) === 'Function')
+        obj.call(context || obj, dara);
         
     var init = obj.init || null;
     
@@ -761,11 +896,14 @@ dara.extend = function(obj, context){
         delete obj.init;
     
     if(isType(obj) === 'Object'){
-        dara.mix(obj, context);
+        if(isType(context) === 'Object')
+            dara.mix(obj, context);
+        else
+            dara.mix(obj);
     }
     
     if(isType(init) === 'Function'){
-        init.call(context || dara, dara);
+        init.call(context || obj, dara);
     }
     
     return dara;
