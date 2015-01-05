@@ -306,7 +306,63 @@ Check `type` as a string matches the type of `anything`.
 * Date
 * Function
 
+## dara.iterator(function)
 
+Create an iterating function with an `each` method. If your object already has an each method the iterator's each method will not conflict. The context of the callback used by each is the object the iterator is set on. If the iterator is just a function the context is a special iterator with a single method named `each`.
+
+**example**
+
+```javascript
+var map = dara.iterator(function(list, mapper, done){
+        
+    var result = [],
+        count = list.length;
+    
+    this.each(list, function(value, list, index){
+        setTimeout(function(){
+            result.push(mapper(value, list, index));
+            
+            if(!--count)
+                done(result);
+        }, 1);
+    });
+    
+});
+
+function mapper(value){
+    return value+1;
+}
+
+map([4, 3, 2], mapper, function(results){
+    console.log(results);
+});
+```
+
+## dara.sequencer(function)
+
+Create a callback aggregator. The aggregator function has a sequence method set to the scope of the object it's set on, or a special sequencer object. Use a `callback` from the argument to recall the callback sent the second argument of `sequence` :).
+
+**example**
+
+```javascript
+var seq = dara.sequencer(function(cb_list){
+    
+    var num = 0;
+    
+    this.sequence(cb_list, function(list, index, callback){
+        
+        list[index](++num, callback);
+        //Any call to callback calls this function.
+        //The list array is the same as cb_list.
+    });
+    
+});
+
+seq([
+    function(n, next){ console.log('seq '+n); next(); },
+    function(n){ console.log('seq '+n); }
+]);
+```
 # Experimental Methods
 
 For all purposes the following methods must be considered experimental for the time being. There will be a possibility of alteration, or removal for all of these.
