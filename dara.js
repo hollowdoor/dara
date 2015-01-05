@@ -253,23 +253,27 @@ var sequencer = function(fn){
 
 /**
 iterator, and sequence examples
-var map = iterator(function(list, cb){
+var map = iterator(function(list, mapper, done){
         
     var result = [],
         count = list.length;
     
     this.each(list, function(value, list, index){
         setTimeout(function(){
-            result.push(value+1);
+            result.push(mapper(value, list, index));
             
             if(!--count)
-                cb(result);
+                done(result);
         }, 1);
     });
     
 });
 
-map([4, 3, 2], function(results){
+function mapper(value){
+    return value+1;
+}
+
+map([4, 3, 2], mapper, function(results){
     console.log(results);
 });
 
@@ -887,7 +891,8 @@ dara.prototype.unFlip = function(){
 
 dara.extend = function(obj, context){
     
-    if(isType(obj) === 'Function')
+    
+    if(isType(obj, 'Function'))
         obj.call(context || obj, dara);
         
     var init = obj.init || null;
@@ -895,14 +900,14 @@ dara.extend = function(obj, context){
     if(init)
         delete obj.init;
     
-    if(isType(obj) === 'Object'){
+    if(isType(obj, 'Object')){
         if(isType(context) === 'Object')
             dara.mix(obj, context);
         else
             dara.mix(obj);
     }
     
-    if(isType(init) === 'Function'){
+    if(isType(init, 'Function')){
         init.call(context || obj, dara);
     }
     

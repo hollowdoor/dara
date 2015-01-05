@@ -1,6 +1,8 @@
 var router = require('./testrouter'),
-    http = require('http');
+    http = require('http'),
+    dara = require("../dara");
 
+dara.extend(require("./toextend"));
 
 router.get("/", function(req, res){
     res.end('home!');
@@ -10,38 +12,23 @@ router.get("/test", function(req, res){
     res.end('this is a test!');
 });
 
+router.get("/mix", function(req, res){
+    dara.mix({
+        speak: function(){
+            return "Hello world!";
+        }
+    });
+    
+    res.end(dara.speak());
+});
+
+router.get("/extend", function(req, res){
+    
+    
+    res.end(dara.speak());
+});
+
 http.createServer(function(req, res){
     router(req, res);
 }).listen(3000);
 
-/*
-var http = require('http'),
-    dara = require('../dara'),
-    fs = require('fs'),
-    path = require('path');
-
-
-var server = http.createServer(function(req, res){
-    
-    var sender = dara.send(req, res);
-    
-    console.log('If something logs sender didn\'t work.');
-    console.log('sender = ', sender);
-    if(!sender.sending){
-        console.log('no send');
-        if(path.basename(req.url) === 'http.html'){
-            fs.readFile(path.join(__dirname,'/http.html'), {encoding: 'utf-8'}, function(err, text){
-                if(err){
-                    res.end(err.message);
-                    return;
-                }
-                
-                res.end(text);
-            });
-        }else{
-            res.end('Not a valid address. Use localhost:8080/http.html');
-        }
-    }
-});
-
-server.listen(8080);*/

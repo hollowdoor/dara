@@ -106,11 +106,7 @@ var map = iterator(function(list, mapper, done){
     
 });
 
-function mapper(value){
-    return value+1;
-}
-
-map([4, 3, 2], mapper, function(results){
+map([4, 3, 2], function(results){
     console.log(results);
 });
 

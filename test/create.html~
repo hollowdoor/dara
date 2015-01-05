@@ -23,6 +23,8 @@ var thing = dara.create({
         console.log(this.com);
     },
     el: dara.element('#hello', 'html'),
+    stuff: dara.event(),
+    
     doBye: function(){
         this.el = 'Bye';
     }

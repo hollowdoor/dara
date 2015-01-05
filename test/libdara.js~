@@ -14,5 +14,5 @@ function second(req, res, next){
 
 
 module.exports = {
-    doIt: dara(first, second)
+    doIt: dara(first, second);
 };

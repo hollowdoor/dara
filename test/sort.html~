@@ -16,10 +16,6 @@ arr = ['2', '3', '1', '5', '4', 'a', 'c', 'b', '10', 9, '1 thing'];
 a = dara.sort(arr);
 
 console.log(a);
-
-a = dara.sort(arr, -1);
-
-console.log(a);
 </script>
 </body>
 </html>
