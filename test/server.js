@@ -28,6 +28,15 @@ router.get("/extend", function(req, res){
     res.end(dara.speak());
 });
 
+router.get("/get", function(req, res){
+    
+    dara.get({}, "$.store.book[0].title");
+    dara.get({}, "$['store']['book'][0]['title']");
+    dara.get({}, "$.store.book[1:2:3].title");
+    dara.get({}, "$.store.book[:2:3].title");
+    res.end("/get");
+});
+
 http.createServer(function(req, res){
     router(req, res);
 }).listen(3000);
