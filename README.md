@@ -363,6 +363,8 @@ seq([
     function(n){ console.log('seq '+n); }
 ]);
 
+```
+
 ## dara.jsonPath(object, query[string], object)
 
 Query a json object, and get limited results based on the query. An optional third argument can be used to control evaluation, and output. The third argument supports one property named `resultType`. Set `resultType` to `VALUE` to get a javascript value, or `PATH` to get a string representing the path to the queried value.
@@ -380,7 +382,6 @@ The `dara` implementation of `jsonPath` is identical to Stefan Gössner's `jsonP
 Get a value from an object with a key, or query an object with jsonPath. The third argument is optional, and is the same as dara.jsonPath's third argument. If the second argument is a `key` the third argument is ignored.
 
 
-```
 # Experimental Methods
 
 For all purposes the following methods must be considered experimental for the time being. There will be a possibility of alteration, or removal for all of these.
