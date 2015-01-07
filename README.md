@@ -367,6 +367,8 @@ seq([
 
 Query a json object, and get limited results based on the query. An optional third argument can be used to control evaluation, and output. The third argument supports one property named `resultType`. Set `resultType` to `VALUE` to get a javascript value, or `PATH` to get a string representing the path to the queried value.
 
+If the `query` is bad then the result is `false`. If the query is successful an array of results is returned.
+
 See [jsonPath][jpath] for more about jsonPath queries.
 
 [jpath]: http://goessner.net/articles/JsonPath/ "Learn jsonPath"
